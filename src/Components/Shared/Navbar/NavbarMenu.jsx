@@ -78,7 +78,7 @@ export default function NavbarMenu() {
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer text-2xl font-bold text-green-800 py-1.5"
+          className="mr-4 cursor-pointer text-2xl font-bold text-green-900 py-1.5"
         >
           CampWell
         </Typography>

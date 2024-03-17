@@ -25,52 +25,19 @@ const Banner = () => {
       classNameName="mySwiper"
     >
       <SwiperSlide>
-        <section className="grid grid-cols-1 gap-0 bg-blue-100 bg-opacity-25 md:grid-cols-2">
+        <section className="grid grid-cols-1 gap-0 bg-green-100 bg-opacity-25 md:grid-cols-2">
           <div className="flex flex-col items-start justify-center px-4 py-24 lg:px-20">
-            <span className="mb-3 text-white bg-blue-900 badge">Pre Beta</span>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-blue-900 md:text-4xl lg:text-5xl">
-              Great customer relationships start here.
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-green-900 md:text-4xl lg:text-5xl">
+            Healing Hearts, Changing Lives
             </h1>
-            <form className="w-full mb-6">
-              <label className="sr-only">Your Email</label>
-              <div className="block lg:hidden">
-                <input
-                  className="text-blue-900 form-input form-input-lg"
-                  type="email"
-                  placeholder="Enter your email..."
-                  required="true"
-                />
-                <button
-                  className="w-full mt-2 text-white bg-blue-900 hover:bg-blue-800 btn btn-lg"
-                  type="submit"
-                >
-                  Get Started
-                </button>
-              </div>
-              <div className="hidden w-full form-append lg:flex">
-                <input
-                  className="text-blue-900 form-input form-input-lg"
-                  type="email"
-                  placeholder="Enter your email..."
-                  required="true"
-                />
-                <button
-                  className="text-white bg-blue-900 hover:bg-blue-800 btn btn-lg"
-                  type="submit"
-                >
-                  Get Started
-                </button>
-              </div>
-            </form>
-            <p className="pr-0 mb-4 text-sm text-blue-800 tracking-relaxed lg:pr-16">
-              Get the #1 Business Messenger and start delivering personalized
-              experiences at every stage of the customer journey.
+            <p className="pr-0 mb-4 text-sm text-green-800 tracking-relaxed lg:pr-16">
+            Experience the Healing Power of Compassion and Care. Our Camps Make a Lasting Impact on Communities.
             </p>
           </div>
           <div>
             <img
-              src="https://images.unsplash.com/photo-1531548731165-c6ae86ff6491?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
-              alt="3 women looking at a laptop"
+              src={img1}
+              alt="banner image"
               className="object-cover w-full h-64 bg-gray-100 md:h-full"
               loading="lazy"
             />
@@ -78,58 +45,46 @@ const Banner = () => {
         </section>
       </SwiperSlide>
       <SwiperSlide>
-        <section className="grid grid-cols-1 gap-0 bg-blue-100 bg-opacity-25 md:grid-cols-2">
+        <section className="grid grid-cols-1 gap-0 bg-green-100 bg-opacity-25 md:grid-cols-2">
           <div className="flex flex-col items-start justify-center px-4 py-24 lg:px-20">
-            <span className="mb-3 text-white bg-blue-900 badge">Pre Beta</span>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-blue-900 md:text-4xl lg:text-5xl">
-              Great customer relationships start here.
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-green-900 md:text-4xl lg:text-4xl">
+            Community Wellness Initiative
             </h1>
-            <form className="w-full mb-6">
-              <label className="sr-only">Your Email</label>
-              <div className="block lg:hidden">
-                <input
-                  className="text-blue-900 form-input form-input-lg"
-                  type="email"
-                  placeholder="Enter your email..."
-                  required="true"
-                />
-                <button
-                  className="w-full mt-2 text-white bg-blue-900 hover:bg-blue-800 btn btn-lg"
-                  type="submit"
-                >
-                  Get Started
-                </button>
-              </div>
-              <div className="hidden w-full form-append lg:flex">
-                <input
-                  className="text-blue-900 form-input form-input-lg"
-                  type="email"
-                  placeholder="Enter your email..."
-                  required="true"
-                />
-                <button
-                  className="text-white bg-blue-900 hover:bg-blue-800 btn btn-lg"
-                  type="submit"
-                >
-                  Get Started
-                </button>
-              </div>
-            </form>
-            <p className="pr-0 mb-4 text-sm text-blue-800 tracking-relaxed lg:pr-16">
-              Get the #1 Business Messenger and start delivering personalized
-              experiences at every stage of the customer journey.
+            <p className="pr-0 mb-4 text-sm text-green-800 tracking-relaxed lg:pr-16">
+            Join Us in Promoting Wellness and Empowering Communities. Together, We're Making Healthier Futures Possible.
             </p>
           </div>
           <div>
             <img
-              src="https://images.unsplash.com/photo-1531548731165-c6ae86ff6491?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
-              alt="3 women looking at a laptop"
+              src={img2}
+              alt="banner image"
               className="object-cover w-full h-64 bg-gray-100 md:h-full"
               loading="lazy"
             />
           </div>
         </section>
       </SwiperSlide>
+      <SwiperSlide>
+        <section className="grid grid-cols-1 gap-0 bg-green-100 bg-opacity-25 md:grid-cols-2">
+          <div className="flex flex-col items-start justify-center px-4 py-24 lg:px-20">
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-green-900 md:text-4xl lg:text-5xl">
+            Caring Beyond Borders
+            </h1>
+            <p className="pr-0 mb-4 text-sm text-green-800 tracking-relaxed lg:pr-16">
+            Bringing Vital Healthcare Services Where They're Needed Most. Our Camps Reach Beyond Boundaries to Save Lives.
+            </p>
+          </div>
+          <div>
+            <img
+              src={img3}
+              alt="banner image"
+              className="object-cover w-full h-64 bg-gray-100 md:h-full"
+              loading="lazy"
+            />
+          </div>
+        </section>
+      </SwiperSlide>
+
     </Swiper>
   );
 };
