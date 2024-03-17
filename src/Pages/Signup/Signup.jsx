@@ -1,6 +1,7 @@
 import { Button, Input } from "@material-tailwind/react";
 import Container from "../../Components/Utils/Container";
 import useAuth from "../../Components/Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Signup = () => {
 
@@ -14,7 +15,17 @@ const Signup = () => {
     const password = form.password.value;
     createUser(email, password)
     .then(user=>{
-      console.log(user?.user);
+      if(user){
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Signup Succeed",
+          background : "#1B5E20",
+          color : "#fff",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
     })
     .catch(error=>{
       console.log(error?.message);

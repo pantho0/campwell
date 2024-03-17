@@ -1,7 +1,39 @@
 import { Button, Input } from "@material-tailwind/react";
 import Container from "../../Components/Utils/Container";
+import useAuth from "../../Components/Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const {signIn} = useAuth();
+  const handleSignIn = (e) =>{
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signIn(email, password)
+    .then(user=>{
+      if(user){
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Succeed",
+          background : "#1B5E20",
+          color : "#fff",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(error=>{
+      if(error){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error?.message,
+        });
+      }
+    })
+  }
   return (
     <div className="">
       <Container>
@@ -11,12 +43,12 @@ const Login = () => {
               <h1 className="mb-4 text-lg font-semibold text-center text-gray-900">
                 Log in to your account
               </h1>
-              <form className="space-y-4">
+              <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="w-full">
-                  <Input label="Email" />
+                  <Input type="email" name="email" label="Email" />
                 </div>
                 <div className="w-full">
-                  <Input label="Password" />
+                  <Input type="password" name="password" label="Password" />
                 </div>
                 <div className="w-1/2 mx-auto">
                   <Button className="w-full">
