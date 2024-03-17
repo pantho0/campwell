@@ -1,0 +1,75 @@
+[
+    {
+      "Camp_Name": "Heart Health Awareness Camp",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "Free",
+      "Scheduled_Date_and_Time": "2024-04-10 09:00 AM - 4:00 PM",
+      "Venue_Location": "Community Center, Main Street",
+      "Specialized_Services_Provided": "Cardiac screenings, Blood pressure checks, Nutrition counseling",
+      "Healthcare_Professionals_in_Attendance": ["Cardiologists", "Nurses", "Dietitians"],
+      "Target_Audience": "Adults aged 40 and above",
+      "Participant_Count": 50,
+      "Details": "Join us for a comprehensive heart health awareness camp aimed at educating adults aged 40 and above about cardiovascular health. Services provided include cardiac screenings, blood pressure checks, and nutrition counseling. Our team of healthcare professionals, including cardiologists, nurses, and dietitians, will be available to offer expert guidance and support. This camp is free of charge and open to all."
+    },
+    {
+      "Camp_Name": "Children's Vaccination Clinic",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "Free",
+      "Scheduled_Date_and_Time": "2024-04-15 10:00 AM - 2:00 PM",
+      "Venue_Location": "Local Health Center, Elm Street",
+      "Specialized_Services_Provided": "Childhood vaccinations, Health education for parents",
+      "Healthcare_Professionals_in_Attendance": ["Pediatricians", "Nurses"],
+      "Target_Audience": "Children under 12 years old",
+      "Participant_Count": 30,
+      "Details": "Our children's vaccination clinic offers free vaccinations for children under 12 years old. In addition to vaccinations, parents can receive valuable health education and guidance from our experienced pediatricians and nurses. Join us at the local health center on Elm Street for this important event."
+    },
+    {
+      "Camp_Name": "Diabetes Management Workshop",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "$20",
+      "Scheduled_Date_and_Time": "2024-04-20 11:00 AM - 1:00 PM",
+      "Venue_Location": "City Hall Conference Room",
+      "Specialized_Services_Provided": "Glucose testing, Foot care tips, Medication management",
+      "Healthcare_Professionals_in_Attendance": ["Endocrinologists", "Diabetes Educators", "Nutritionists"],
+      "Target_Audience": "Individuals with diabetes",
+      "Participant_Count": 25,
+      "Details": "Take control of your diabetes at our comprehensive management workshop. Join us for glucose testing, foot care tips, and medication management strategies. Our team of healthcare professionals, including endocrinologists, diabetes educators, and nutritionists, will provide personalized guidance and support. This workshop requires a fee of $20 and is open to individuals with diabetes."
+    },
+    {
+      "Camp_Name": "Women's Health Check-Up Camp",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "Free",
+      "Scheduled_Date_and_Time": "2024-04-25 08:00 AM - 3:00 PM",
+      "Venue_Location": "Women's Health Center, Oak Avenue",
+      "Specialized_Services_Provided": "Breast exams, Pap smears, Reproductive health counseling",
+      "Healthcare_Professionals_in_Attendance": ["OB-GYNs", "Nurses", "Women's Health Specialists"],
+      "Target_Audience": "Women of all ages",
+      "Participant_Count": 40,
+      "Details": "Ladies, prioritize your health with our women's health check-up camp. Receive essential screenings such as breast exams and pap smears, along with reproductive health counseling. Our team of OB-GYNs, nurses, and women's health specialists will ensure your well-being. This camp is free and open to women of all ages."
+    },
+    {
+      "Camp_Name": "Mental Health Awareness Seminar",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "Free",
+      "Scheduled_Date_and_Time": "2024-04-30 06:00 PM - 8:00 PM",
+      "Venue_Location": "Community Center Auditorium, Pine Street",
+      "Specialized_Services_Provided": "Mental health screenings, Stress management techniques, Therapy referrals",
+      "Healthcare_Professionals_in_Attendance": ["Psychiatrists", "Psychologists", "Therapists"],
+      "Target_Audience": "General public",
+      "Participant_Count": 60,
+      "Details": "Join us for an enlightening mental health awareness seminar aimed at promoting well-being and resilience. Participate in mental health screenings, learn stress management techniques, and gain insights into therapy referrals. Our team of psychiatrists, psychologists, and therapists will provide valuable guidance. This seminar is free and open to the general public."
+    },
+    {
+      "Camp_Name": "Senior Health and Fitness Expo",
+      "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
+      "Camp_Fees": "$10",
+      "Scheduled_Date_and_Time": "2024-05-05 09:00 AM - 12:00 PM",
+      "Venue_Location": "Senior Center, Maple Avenue",
+      "Specialized_Services_Provided": "Fitness assessments, Fall risk evaluations, Nutrition workshops",
+      "Healthcare_Professionals_in_Attendance": ["Geriatricians", "Physical Therapists", "Nutritionists"],
+      "Target_Audience": "Seniors aged 65 and above",
+      "Participant_Count": 35,
+      "Details": "Seniors, join us for a rejuvenating health and fitness expo designed just for you. Enjoy fitness assessments, fall risk evaluations, and informative nutrition workshops to enhance your well-being. Our team of geriatricians, physical therapists, and nutritionists will guide you on your journey to optimal health. Admission to this expo is $10."
+    }
+  ]
+  
