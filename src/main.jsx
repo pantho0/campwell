@@ -5,7 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { router } from './Router/Routes.jsx';
+import AuthProvider, { AuthContext } from './Provider/AuthProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
- <RouterProvider router={router}/>
+
+  <AuthProvider>
+    <RouterProvider router={router}/>
+  </AuthProvider>
+
 )
