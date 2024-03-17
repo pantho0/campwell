@@ -6,6 +6,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Container from "../../Utils/Container";
  
 function NavList() {
   return (
@@ -16,7 +17,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
           Home
         </a>
       </Typography>
@@ -26,7 +27,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
           Login
         </a>
       </Typography>
@@ -36,7 +37,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
           Signup
         </a>
       </Typography>
@@ -46,7 +47,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
           Contact Us
         </a>
       </Typography>
@@ -54,7 +55,7 @@ function NavList() {
   );
 }
  
-export default function App() {
+export default function NavbarMenu() {
   const [openNav, setOpenNav] = React.useState(false);
  
   const handleWindowResize = () =>
@@ -69,13 +70,15 @@ export default function App() {
   }, []);
  
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-6 py-3 rounded-none">
+    <div className="shadow-lg">
+      <Container>
+      <Navbar className="px-6 py-3 rounded-none shadow-none">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5"
+          className="mr-4 cursor-pointer text-2xl font-bold text-green-800 py-1.5"
         >
           CampWell
         </Typography>
@@ -99,5 +102,7 @@ export default function App() {
         <NavList />
       </Collapse>
     </Navbar>
+    </Container>
+    </div>
   );
 }
