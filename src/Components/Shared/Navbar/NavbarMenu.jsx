@@ -7,6 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Container from "../../Utils/Container";
+import { Link } from "react-router-dom";
  
 function NavList() {
   return (
@@ -17,9 +18,9 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
+        <Link to="/" className="flex items-center hover:text-green-500 transition-colors">
           Home
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -27,9 +28,9 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
+        <Link to='/login' className="flex items-center hover:text-green-500 transition-colors">
           Login
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -37,9 +38,9 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-green-500 transition-colors">
+        <Link to='/signup' className="flex items-center hover:text-green-500 transition-colors">
           Signup
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
