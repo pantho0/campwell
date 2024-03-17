@@ -18,24 +18,24 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 function NavList() {
-  const {logOut, user} = useAuth()
-  
-  const logOutAlert = () =>{
+  const { logOut, user } = useAuth();
+
+  const logOutAlert = () => {
     Swal.fire({
       position: "top-end",
       icon: "success",
       title: "Login Succeed",
-      background : "#1B5E20",
-      color : "#fff",
+      background: "#1B5E20",
+      color: "#fff",
       showConfirmButton: false,
-      timer: 1500
-    })
-  }
+      timer: 1500,
+    });
+  };
 
-  const handleLogout = () =>{
-    logOut()
-    logOutAlert()
-  }
+  const handleLogout = () => {
+    logOut();
+    logOutAlert();
+  };
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -52,32 +52,67 @@ function NavList() {
           Home
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <Link
-          to="/login"
-          className="flex items-center hover:text-green-500 transition-colors"
-        >
-          Login
-        </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <Link
-          to="/signup"
-          className="flex items-center hover:text-green-500 transition-colors"
-        >
-          Signup
-        </Link>
-      </Typography>
+
+      {!user ? (
+        <>
+          <Typography
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-medium"
+          >
+            <Link
+              to="/login"
+              className="flex items-center hover:text-green-500 transition-colors"
+            >
+              Login
+            </Link>
+          </Typography>
+          <Typography
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-medium"
+          >
+            <Link
+              to="/signup"
+              className="flex items-center hover:text-green-500 transition-colors"
+            >
+              Signup
+            </Link>
+          </Typography>
+        </>
+      ) : (
+        <>
+          <Typography
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-medium"
+          >
+            <Link
+              to="/available-camps"
+              className="flex items-center hover:text-green-500 transition-colors"
+            >
+              Available Camps
+            </Link>
+          </Typography>
+          <Typography
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-medium"
+          >
+            <Link
+              to="/dashboard"
+              className="flex items-center hover:text-green-500 transition-colors"
+            >
+              Dashboard
+            </Link>
+          </Typography>
+        </>
+      )}
+
       <Typography
         as="li"
         variant="small"
@@ -91,22 +126,22 @@ function NavList() {
           Contact Us
         </a>
       </Typography>
-      {
-        user && <Menu>
-        <MenuHandler>
-          <Avatar
-            src="https://docs.material-tailwind.com/img/face-2.jpg"
-            alt="avatar"
-            size="sm"
-          />
-        </MenuHandler>
-        <MenuList>
-          <MenuItem>Menu Item 1</MenuItem>
-          <MenuItem>Menu Item 2</MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </MenuList>
-      </Menu>
-      }
+      {user && (
+        <Menu>
+          <MenuHandler>
+            <Avatar
+              src="https://docs.material-tailwind.com/img/face-2.jpg"
+              alt="avatar"
+              size="sm"
+            />
+          </MenuHandler>
+          <MenuList>
+            <MenuItem>Menu Item 1</MenuItem>
+            <MenuItem>Menu Item 2</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </MenuList>
+        </Menu>
+      )}
     </ul>
   );
 }
