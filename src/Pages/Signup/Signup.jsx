@@ -1,18 +1,29 @@
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Input, Option, Select } from "@material-tailwind/react";
 import Container from "../../Components/Utils/Container";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const Signup = () => {
-
+  const [role, setRole] = useState('')
   const {createUser} = useAuth()
 
-
+  const handleRole = (value) =>{
+    console.log(value)
+  }
   const handleSignup = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    if(!role){
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill up register as input field",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    }
     createUser(email, password)
     .then(user=>{
       if(user){
@@ -43,24 +54,26 @@ const Signup = () => {
               </h1>
               <form onSubmit={handleSignup} className="space-y-4">
                 <div className="w-full">
-                  <Input type="email" name="email" label="Email" />
+                  <Input type="email" name="email" label="Email" required/>
                 </div>
                 <div className="w-full">
-                  <Input type="password" name="password" label="Password" />
+                  <Input type="password" name="password" label="Password" required/>
+                </div>
+                <div className="w-full">
+                  <Select onChange={handleRole} label="Register As" required>
+                    <Option value="Organizer">Organizer</Option>
+                    <Option value="Health Care Proffesional">Health Care Proffesional</Option>
+                    <Option value="Participant">Participant</Option>
+                  </Select>
                 </div>
                 <div className="w-1/2 mx-auto">
-                  <Button className="w-full">
-                    <input type="submit" value="Login Now" />
+                  <Button type="submit" className="w-full">
+                    <input type="submit" value="Signup Now" />
                   </Button>
                 </div>
               </form>
               <div className="my-6">
                 <hr />
-              </div>
-              <div className="w-1/2 mx-auto">
-                <Button className="w-full">
-                  <input type="submit" value="Login with google" />
-                </Button>
               </div>
             </div>
             <p className="mb-4 text-xs text-center text-gray-400">
