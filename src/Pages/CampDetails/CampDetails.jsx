@@ -1,15 +1,26 @@
 import { useLoaderData } from "react-router-dom";
-
+import { Button } from "@material-tailwind/react";
+import RegistrationModal from "../../Components/Modals/Registration/RegistrationModal";
+import { useState } from "react";
 const CampDetails = () => {
-  const camp = useLoaderData();
+  let [isOpen, setIsOpen] = useState(false)
+  function closeModal() {
+    setIsOpen(false)
+  }
 
+  function openModal() {
+    setIsOpen(true)
+  }
+  const camp = useLoaderData();
+  const fee = camp?.data?.Camp_Fees
   return (
     <div
       className="px-4 py-24 mx-auto max-w-7xl"
       itemScope
       itemType={camp.data.Image}
     >
-      <div className="w-full mx-auto mb-12 text-left md:w-3/4 lg:w-1/2">
+      <RegistrationModal isOpen={isOpen}  closeModal={closeModal} fee={fee}/>
+      <div className="w-full mx-auto mb-4 text-left md:w-3/4 lg:w-1/2">
         <img
           src="/brand/og.png"
           className="object-cover w-full h-64 bg-center rounded-lg"
@@ -39,16 +50,18 @@ const CampDetails = () => {
             Targeted Audience : {camp.data.Target_Audience}
           </a>
           <a className="badge hover:bg-gray-200" href="#">
-          Health Care Professionals : {camp.data.Healthcare_Professionals_in_Attendance.join(", ")}
+            Health Care Professionals :{" "}
+            {camp.data.Healthcare_Professionals_in_Attendance.join(", ")}
           </a>
-          
         </div>
-        <hr className="mb-2" />
+        <hr className="" />
       </div>
       <div className="w-full mx-auto prose md:w-3/4 lg:w-1/2">
         <p className="my-4">{camp.data.Details}</p>
         <hr className="my-4" />
-
+        <div className="flex justify-center">
+          <Button onClick={openModal} variant="outlined" className="border-green-700 hover:bg-green-900 hover:text-white">Join Camp</Button>
+        </div>
       </div>
     </div>
   );
