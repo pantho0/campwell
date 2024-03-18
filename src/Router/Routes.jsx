@@ -6,6 +6,7 @@ import Signup from "../Pages/Signup/Signup";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import CampDetails from "../Pages/CampDetails/CampDetails";
 import useAxiosPublic from "../Components/Hooks/useAxiosPublic";
+import AvailableCamps from "../Pages/Available Camp/AvailableCamps";
 
 
 const axiosPublic = useAxiosPublic()
@@ -28,10 +29,14 @@ export const router = createBrowserRouter([
           element : <Signup/>
         },
         {
-          path : '/camp-details/:campID',
+          path : 'camp-details/:campID',
           element : <CampDetails/>,
           loader : async ({params}) => await axiosPublic(`/camp-details/${params.campID}`)
 
+        },
+        {
+          path : 'available-camps',
+          element : <AvailableCamps/>,
         }
       ]
     },

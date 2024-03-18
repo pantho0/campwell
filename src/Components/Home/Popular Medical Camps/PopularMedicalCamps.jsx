@@ -4,6 +4,7 @@ import CampCard from "../../Card/CampCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const PopularMedicalCamps = () => {
   const axiosPublic = useAxiosPublic()
   const [participant, setParticipant] = useState('asc')
@@ -46,7 +47,9 @@ const PopularMedicalCamps = () => {
               }
             </div>
             <div className="flex justify-center my-8">
+              <Link to="/available-camps">
               <Button className="bg-green-900">See All Camps</Button>
+              </Link>
               </div>
           </div>
         </div>
