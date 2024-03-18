@@ -8,10 +8,9 @@ import {
 } from "@material-tailwind/react";
 
 const CampCard = ({ camp }) => {
-  console.log(camp);
   return (
     <div>
-      <Card className="w-[375px]">
+      <Card className="w-full md:w-[375px]">
         <CardHeader shadow={false} floated={false} className="h-56">
           <img src={camp?.Image} className="object-cover" />
         </CardHeader>

@@ -2,7 +2,7 @@
     {
       "Camp_Name": "Heart Health Awareness Camp",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "Free",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-04-10 09:00 AM - 4:00 PM",
       "Venue_Location": "Community Center, Main Street",
       "Specialized_Services_Provided": "Cardiac screenings, Blood pressure checks, Nutrition counseling",
@@ -14,7 +14,7 @@
     {
       "Camp_Name": "Children's Vaccination Clinic",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "Free",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-04-15 10:00 AM - 2:00 PM",
       "Venue_Location": "Local Health Center, Elm Street",
       "Specialized_Services_Provided": "Childhood vaccinations, Health education for parents",
@@ -26,7 +26,7 @@
     {
       "Camp_Name": "Diabetes Management Workshop",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "$20",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-04-20 11:00 AM - 1:00 PM",
       "Venue_Location": "City Hall Conference Room",
       "Specialized_Services_Provided": "Glucose testing, Foot care tips, Medication management",
@@ -38,7 +38,7 @@
     {
       "Camp_Name": "Women's Health Check-Up Camp",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "Free",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-04-25 08:00 AM - 3:00 PM",
       "Venue_Location": "Women's Health Center, Oak Avenue",
       "Specialized_Services_Provided": "Breast exams, Pap smears, Reproductive health counseling",
@@ -50,7 +50,7 @@
     {
       "Camp_Name": "Mental Health Awareness Seminar",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "Free",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-04-30 06:00 PM - 8:00 PM",
       "Venue_Location": "Community Center Auditorium, Pine Street",
       "Specialized_Services_Provided": "Mental health screenings, Stress management techniques, Therapy referrals",
@@ -62,7 +62,7 @@
     {
       "Camp_Name": "Senior Health and Fitness Expo",
       "Image": "https://lh3.googleusercontent.com/proxy/nz4klFYjQkL4HCXYy5WtFUe_nZGWEX9cJTJ_MD_54XCQlQfMQZYhACvST4PQbJnTTFGx0swB8R0yec0",
-      "Camp_Fees": "$10",
+      "Camp_Fees": 10,
       "Scheduled_Date_and_Time": "2024-05-05 09:00 AM - 12:00 PM",
       "Venue_Location": "Senior Center, Maple Avenue",
       "Specialized_Services_Provided": "Fitness assessments, Fall risk evaluations, Nutrition workshops",

@@ -1,14 +1,28 @@
 import Container from "../../Utils/Container";
 import { Select, Option, Button } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 import CampCard from "../../Card/CampCard";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useState } from "react";
 const PopularMedicalCamps = () => {
-  const [camps, setCamps] = useState([]);
-  useEffect(() => {
-    fetch("popularmedicalcamps.json")
-      .then((res) => res.json())
-      .then((data) => setCamps(data));
-  }, []);
+  const axiosPublic = useAxiosPublic()
+  const [participant, setParticipant] = useState('asc')
+
+
+  const handleSorting = (value) =>{
+    setParticipant(value)
+  }
+
+
+
+  const {data:camps=[]} = useQuery({
+    queryKey : ['camps', participant],
+    queryFn: async()=>{
+      const {data} = await axiosPublic(`/get-all-camps/?sortField=Participant_Count&sortOrder=${participant}`)
+      return data;
+    }
+  })
+
   return (
     <Container>
       <div className="mt-16 relative">
@@ -17,9 +31,10 @@ const PopularMedicalCamps = () => {
         </h3>
         <div className="absolute right-0">
           <div className="flex w-72 flex-col gap-6">
-            <Select label="Sort by  participant engagement" success>
-              <Option>Low To High</Option>
-              <Option>High To Low</Option>
+            <Select onChange={handleSorting} label="Sort by  participant engagement" success>
+              <Option value="asc">Low To High</Option>
+              <Option value="desc">High To Low</Option>
+
             </Select>
           </div>
         </div>
