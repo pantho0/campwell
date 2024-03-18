@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const CampCard = ({ camp }) => {
   return (
@@ -81,6 +82,7 @@ const CampCard = ({ camp }) => {
           
         </CardBody>
         <CardFooter className="pt-0">
+          <Link to={`/camp-details/${camp?._id}`}>
           <Button
             ripple={false}
             fullWidth={true}
@@ -88,6 +90,7 @@ const CampCard = ({ camp }) => {
           >
             View Details
           </Button>
+          </Link>
         </CardFooter>
       </Card>
     </div>
