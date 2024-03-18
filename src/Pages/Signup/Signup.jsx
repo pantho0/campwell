@@ -3,13 +3,15 @@ import Container from "../../Components/Utils/Container";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
 const Signup = () => {
   const [role, setRole] = useState('')
+  const axiosPublic = useAxiosPublic()
   const {createUser} = useAuth()
 
   const handleRole = (value) =>{
-    console.log(value)
+    setRole(value)
   }
   const handleSignup = (e) => {
     e.preventDefault();
@@ -21,8 +23,11 @@ const Signup = () => {
         icon: "error",
         title: "Oops...",
         text: "Please fill up register as input field",
-        footer: '<a href="#">Why do I have this issue?</a>'
       });
+    }
+    const userInfo = {
+      email : email,
+      role : role,
     }
     createUser(email, password)
     .then(user=>{
@@ -36,10 +41,17 @@ const Signup = () => {
           showConfirmButton: false,
           timer: 1500
         });
+        axiosPublic.post('/save-user',userInfo)
       }
     })
     .catch(error=>{
-      console.log(error?.message);
+      if(error){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      }
     })
   };
 
