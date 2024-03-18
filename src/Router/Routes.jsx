@@ -7,6 +7,7 @@ import Dashboard from "../Layouts/Dashboard/Dashboard";
 import CampDetails from "../Pages/CampDetails/CampDetails";
 import useAxiosPublic from "../Components/Hooks/useAxiosPublic";
 import AvailableCamps from "../Pages/Available Camp/AvailableCamps";
+import AddCamp from "../Pages/Dashboard/Organizer Dashboard/AddCamp";
 
 
 const axiosPublic = useAxiosPublic()
@@ -44,7 +45,10 @@ export const router = createBrowserRouter([
       path: '/dashboard',
       element : <Dashboard/>,
       children:[
-
+        {
+          path : 'add-a-camp',
+          element : <AddCamp/>
+        }
       ]
     }
   ]);

@@ -6,9 +6,21 @@ import { Link, Outlet } from "react-router-dom";
 import OrganizerMenu from "../../Components/Dashboard/OrganizerMenu";
 import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
 const Dashboard = () => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const userEmail = user?.email;
+  const { data: loggedUser = "" } = useQuery({
+    queryKey: ["loggedUser"],
+    queryFn: async () => {
+      const { data } = await axiosPublic(`/get-user/${userEmail}`);
+      return data;
+    },
+  });
+  console.log(loggedUser.role);
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
@@ -71,7 +83,11 @@ const Dashboard = () => {
                 </div>
                 <hr className="mb-5" />
               </div>
-              <OrganizerMenu />
+              {loggedUser && loggedUser.role === "Organizer" ? (
+                <OrganizerMenu />
+              ) : (
+                ""
+              )}
             </div>
           </Drawer>
         </div>
@@ -110,9 +126,13 @@ const Dashboard = () => {
             </div>
             <hr className="mb-5" />
           </div>
-          <OrganizerMenu />
+          {loggedUser && loggedUser.role === "Organizer" ? (
+            <OrganizerMenu />
+          ) : (
+            ""
+          )}
         </div>
-        <div>
+        <div className="flex-1">
           <Outlet />
         </div>
       </div>
