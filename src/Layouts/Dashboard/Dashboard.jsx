@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Container from "../../Components/Utils/Container";
 import { Outlet } from "react-router-dom";
+import OrganizerMenu from "../../Components/Dashboard/OrganizerMenu";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -158,7 +159,7 @@ const Dashboard = () => {
               <h6 className="text-3xl font-semibold text-white text-center mt-5 mb-5">CAMPWELL</h6>
               <hr />
             </div>
-            
+            <OrganizerMenu/>
         </div>
         <div>
             <Outlet/>
