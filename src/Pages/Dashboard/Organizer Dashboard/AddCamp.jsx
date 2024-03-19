@@ -7,20 +7,22 @@ import {
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form"
 import { uploadImage } from "../../../Components/API/api";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const AddCamp = () => {
+  const axiosPublic = useAxiosPublic()
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm()
 
   const onSubmit = async(data) =>{
     const image = {image: data.image[0]}
     const imageUrl = await uploadImage(image)
-    console.log(imageUrl);
     const campData = {
       Camp_Name : data.name,
       Image : imageUrl,
@@ -33,7 +35,20 @@ const AddCamp = () => {
       Participant_Count: 0,
       Details: data.details
     }
-    console.log(campData);
+    
+    const {data:campuploadresult} = await axiosPublic.post('/add-camp',campData)
+    if(campuploadresult.insertedId){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Camp Added",
+        background : "#1B5E20",
+        color : "#fff",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+    reset();
   }
 
   return (

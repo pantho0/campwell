@@ -46,7 +46,7 @@ const CampCard = ({ camp }) => {
             color=""
             className="opacity-75 text-gray-800 "
           >
-           Specialized Services: {camp?.Healthcare_Professionals_in_Attendance.join(', ')}
+           Specialized Services: {camp?.Healthcare_Professionals_in_Attendance}
           </Typography>
           <Typography
             variant="small"
