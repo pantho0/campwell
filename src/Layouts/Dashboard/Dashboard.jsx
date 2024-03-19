@@ -14,13 +14,13 @@ const Dashboard = () => {
   const axiosPublic = useAxiosPublic();
   const userEmail = user?.email;
   const { data: loggedUser = "" } = useQuery({
-    queryKey: ["loggedUser"],
+    queryKey: ["loggedUser", userEmail],
     queryFn: async () => {
       const { data } = await axiosPublic(`/get-user/${userEmail}`);
       return data;
     },
   });
-  console.log(loggedUser.role);
+
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);

@@ -22,7 +22,7 @@ const CampDetails = () => {
       <RegistrationModal isOpen={isOpen}  closeModal={closeModal} fee={fee}/>
       <div className="w-full mx-auto mb-4 text-left md:w-3/4 lg:w-1/2">
         <img
-          src="/brand/og.png"
+          src={camp.data?.Image}
           className="object-cover w-full h-64 bg-center rounded-lg"
           alt="Kutty"
         />
@@ -51,7 +51,7 @@ const CampDetails = () => {
           </a>
           <a className="badge hover:bg-gray-200" href="#">
             Health Care Professionals :{" "}
-            {camp.data.Healthcare_Professionals_in_Attendance.join(", ")}
+            {camp.data.Healthcare_Professionals_in_Attendance}
           </a>
         </div>
         <hr className="" />

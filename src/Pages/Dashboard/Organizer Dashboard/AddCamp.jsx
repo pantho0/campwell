@@ -9,9 +9,11 @@ import { useForm } from "react-hook-form"
 import { uploadImage } from "../../../Components/API/api";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../Components/Hooks/useAuth";
 
 
 const AddCamp = () => {
+  const {user} = useAuth()
   const axiosPublic = useAxiosPublic()
   const {
     register,
@@ -33,7 +35,8 @@ const AddCamp = () => {
       Healthcare_Professionals_in_Attendance: data.professionals,
       Target_Audience : data.audience,
       Participant_Count: 0,
-      Details: data.details
+      Details: data.details,
+      organizer_email : user?.email
     }
     
     const {data:campuploadresult} = await axiosPublic.post('/add-camp',campData)

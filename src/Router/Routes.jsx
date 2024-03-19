@@ -8,10 +8,11 @@ import CampDetails from "../Pages/CampDetails/CampDetails";
 import useAxiosPublic from "../Components/Hooks/useAxiosPublic";
 import AvailableCamps from "../Pages/Available Camp/AvailableCamps";
 import AddCamp from "../Pages/Dashboard/Organizer Dashboard/AddCamp";
+import ManageCamp from "../Pages/Dashboard/Organizer Dashboard/ManageCamp";
+import useAuth from "../Components/Hooks/useAuth";
 
 
 const axiosPublic = useAxiosPublic()
-
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
         {
           path : 'add-a-camp',
           element : <AddCamp/>
+        },
+        {
+          path : 'manage-camps/:email',
+          element : <ManageCamp/>,
         }
       ]
     }

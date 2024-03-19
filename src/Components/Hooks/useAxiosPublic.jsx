@@ -2,7 +2,7 @@ import axios from "axios"
 
 const useAxiosPublic = () => {
     const axiosPublic = axios.create({
-        baseURL : "http://localhost:5000/api/v1"
+        baseURL : "https://camp-server-two.vercel.app/api/v1"
     })
     return axiosPublic;
 };
