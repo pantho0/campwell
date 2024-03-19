@@ -1,13 +1,41 @@
 import {
   Button,
   Card,
-  Checkbox,
   Input,
   Textarea,
   Typography,
 } from "@material-tailwind/react";
+import { useForm } from "react-hook-form"
+import { uploadImage } from "../../../Components/API/api";
+
 
 const AddCamp = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async(data) =>{
+    const image = {image: data.image[0]}
+    const imageUrl = await uploadImage(image)
+    console.log(imageUrl);
+    const campData = {
+      Camp_Name : data.name,
+      Image : imageUrl,
+      Camp_Fees : data.fee,
+      Scheduled_Date_and_Time : data.datetime,
+      Venue_Location : data.location,
+      Specialized_Services_Provided : data.specialized,
+      Healthcare_Professionals_in_Attendance: data.professionals,
+      Target_Audience : data.audience,
+      Participant_Count: 0,
+      Details: data.details
+    }
+    console.log(campData);
+  }
+
   return (
     <div>
       <div>
@@ -17,7 +45,7 @@ const AddCamp = () => {
       </div>
       <div className="w-full">
         <Card color="transparent" shadow={false} className="w-full">
-          <form className="mt-8 mb-2 px-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 px-6">
             <div className="mb-1 gap-6">
               {/* Input-1 */}
               <div className="flex gap-3 flex-col md:flex-row">
@@ -28,11 +56,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="text"
+                    name="name"
                     placeholder="name@mail.com"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('name')}
                   />
                 </div>
                 <div className="flex-1">
@@ -42,11 +73,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="number"
+                    name="fee"
                     placeholder="name@mail.com"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('fee')}
                   />
                 </div>
               </div>
@@ -59,11 +93,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="datetime-local"
-                    placeholder="name@mail.com"
+                    placeholder="Enter Date and Time"
+                    name="datetime"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('datetime')}
                   />
                 </div>
                 <div className="flex-1">
@@ -73,11 +110,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="text"
-                    placeholder="name@mail.com"
+                    placeholder="Enter camp loaction"
+                    name="location"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('location')}
                   />
                 </div>
               </div>
@@ -90,11 +130,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="text"
+                    name="specialized"
                     placeholder="use comma after each service"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('specialized')}
                   />
                 </div>
                 <div className="flex-1">
@@ -104,11 +147,14 @@ const AddCamp = () => {
                   <Input
                     size="lg"
                     type="text"
+                    name="professionals"
                     placeholder="use comma after each professionals"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('professionals')}
                   />
                 </div>
               </div>
@@ -122,10 +168,12 @@ const AddCamp = () => {
                     size="lg"
                     type="text"
                     placeholder=""
+                    name="audience"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('audience')}
                   />
                 </div>
                 <div className="flex-1">
@@ -136,25 +184,27 @@ const AddCamp = () => {
                     size="lg"
                     type="file"
                     placeholder="name@mail.com"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    {...register('image')}
                   />
                 </div>
               </div>
               {/* Input-5 */}
               <div className="flex gap-3 flex-col md:flex-row">
                 <div className="flex-1">
-                  <Typography type="text" variant="h6" color="blue-gray" className="mb-3">
+                  <Typography type="text"  variant="h6" color="blue-gray" className="mb-3">
                   Comprehensive Description
                   </Typography>
-                  <Textarea size="lg" label="Textarea Large" />
+                  <Textarea required name="details" {...register('details')} size="lg" label="Textarea Large" />
                 </div>
               </div>
             </div>
-            <Button className="mt-6 mb-6 bg-green-700 hover:bg-green-900" fullWidth>
-              sign up
+            <Button type="submit" className="mt-6 mb-6 bg-green-700 hover:bg-green-900" fullWidth>
+              Add Camp
             </Button>
           </form>
         </Card>
