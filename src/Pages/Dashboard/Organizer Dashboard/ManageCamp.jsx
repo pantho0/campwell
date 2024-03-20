@@ -3,10 +3,29 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md"
+import { useEffect, useState } from "react";
+import CampUpdateModal from "../../../Components/Modals/Camp Update/CampUpdateModal";
 const TABLE_HEAD = ["Camp_Name", "Camp_Fees", "Scheduled_Date_and_Time", "Venue_Location", "Specialized_Services_Provided", "Healthcare_Professionals_in_Attendance", "Target_Audience", "Participant_Count", "Edit", "Delete"];
 
 
 const ManageCamp = () => {
+  let [isOpen, setIsOpen] = useState(false)
+  const [campName, setCampName] = useState('')
+  const [campFee, setCampFee] = useState(0)
+  const [date, setDate] = useState('')
+  const [location, setLocation] = useState('')
+  const [special, setSpecial] = useState('')
+  const [professionals, setProfessionals] = useState('')
+  const [audience, setAudience] = useState('')
+  const [description, setDescription] = useState('')
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
   const axiosPublic = useAxiosPublic();
   const { email } = useParams();
   const { data: camps = [], isPending } = useQuery({
@@ -23,6 +42,18 @@ const ManageCamp = () => {
 
   return (
     <div>
+      <CampUpdateModal 
+      isOpen={isOpen} 
+      closeModal={closeModal}
+      campName={campName}
+      campFee={campFee}
+      date={date}
+      location={location}
+      special={special}
+      professionals={professionals}
+      audience={audience}
+      description={description}
+      />
       <div>
         <h4 className="text-center text-bold text-green-800 text-3xl underline mt-4 mb-4">
           Manage Camps
@@ -50,7 +81,7 @@ const ManageCamp = () => {
               </tr>
             </thead>
             <tbody>
-              {camps.map(({ Camp_Name,Camp_Fees, Scheduled_Date_and_Time, Venue_Location, Specialized_Services_Provided, Healthcare_Professionals_in_Attendance, Target_Audience, Participant_Count,}, index) => {
+              {camps.map(({Camp_Name,Camp_Fees, Scheduled_Date_and_Time, Venue_Location, Specialized_Services_Provided, Healthcare_Professionals_in_Attendance, Target_Audience, Participant_Count, Details}, index) => {
                 const isLast = index === camps.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -150,8 +181,18 @@ const ManageCamp = () => {
                         color="blue-gray"
                         className="font-medium"
                       >
-                        <Button>
-                        <CiEdit />
+                        <Button onClick={()=>{
+                          openModal(); 
+                          setCampName(Camp_Name); 
+                          setCampFee(Camp_Fees); 
+                          setDate(Scheduled_Date_and_Time);
+                          setLocation(Venue_Location)
+                          setSpecial(Specialized_Services_Provided)
+                          setProfessionals(Healthcare_Professionals_in_Attendance)
+                          setAudience(Target_Audience)
+                          setDescription(Details)
+                          }} variant="outlined" size="sm" className="hover:bg-green-900 hover:text-white">
+                        <CiEdit size={20} />
                         </Button>
                       </Typography>
                     </td>
@@ -163,8 +204,8 @@ const ManageCamp = () => {
                         color="blue-gray"
                         className="font-medium"
                       >
-                        <Button>
-                        <CiEdit />
+                        <Button variant="outlined" size="sm" className="hover:bg-green-900 hover:text-white">
+                        <MdDelete size={20} />
                         </Button>
                       </Typography>
                     </td>
