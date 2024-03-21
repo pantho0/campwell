@@ -1,4 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { uploadImage } from "../../../Components/API/api";
 import {
   Button,
   Card,
@@ -7,67 +8,85 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
-import { uploadImage } from "../../API/api";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useAuth from "../../Hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 
-const CampUpdateModal = ({ 
-  isOpen, 
-  closeModal, 
-  campName, 
-  campFee, 
-  date, 
-  location,
-  special,
-  professionals,
-  audience,
-  description
-
-}) => {
-    const {user} = useAuth()
-
-  // const {data:camp={}}=useQuery({
-  //   queryKey:['camp', user?.email,],
-  //   queryFn : async()=>{
-  //     const {data} = await axiosPublic(`/camp-details/${campId}`)
-  //     return data;
-  //   }
-  // })
-
- 
+const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
+  const axiosPublic = useAxiosPublic();
+  const [loadedCamp, setLoadedCamp] = useState([]);
   const {
     register,
     handleSubmit,
     reset,
+    setValue, // Include setValue from useForm
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const onSubmit = async(data) =>{
-    const image = {image: data.image[0]}
-    const imageUrl = await uploadImage(image)
+  const onSubmit = async (data) => {
+    const image = { image: data.image[0] };
+    const imageUrl = await uploadImage(image);
     const campData = {
-      Camp_Name : data.name,
-      Image : imageUrl,
-      Camp_Fees : data.fee,
-      Scheduled_Date_and_Time : data.datetime,
-      Venue_Location : data.location,
-      Specialized_Services_Provided : data.specialized,
+      Camp_Name: data.name,
+      Image: imageUrl,
+      Camp_Fees: data.fee,
+      Scheduled_Date_and_Time: data.datetime,
+      Venue_Location: data.location,
+      Specialized_Services_Provided: data.specialized,
       Healthcare_Professionals_in_Attendance: data.professionals,
-      Target_Audience : data.audience,
+      Target_Audience: data.audience,
       Participant_Count: 0,
       Details: data.details,
-      organizer_email : user?.email
+      organizer_email: user?.email,
+    };
+
+    const { data: campuploadresult } = await axiosPublic.post(
+      "/add-camp",
+      campData
+    );
+    if (campuploadresult.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Camp Added",
+        background: "#1B5E20",
+        color: "#fff",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    reset();
+  };
+
+  useEffect(() => {
+    if (isOpen && campId) {
+        axiosPublic(`/camp-details/${campId}`).then((res) => {
+        setLoadedCamp(res.data);
+        // Set form values using setValue after loading the data
+        Object.keys(res.data).forEach((key) => {
+          setValue(key, res.data[key]);
+          
+        });
+        setTimeout(() => {
+          reset();
+        }, 100);
+      });
     }
     
-    
-    
-  }
+  }, [axiosPublic, campId, isOpen, setValue, reset]);
 
 
-
-
+  useEffect(() => {
+    if (isOpen && campId) {
+      axiosPublic(`/camp-details/${campId}`).then((res) => {
+        setLoadedCamp(res.data);
+        Object.keys(res.data).forEach((key) => {
+          setValue(key, res.data[key]);
+        });
+      });
+    }
+  }, [axiosPublic, campId, isOpen, setValue]);
+  console.log(loadedCamp);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -121,9 +140,9 @@ const CampUpdateModal = ({
                               </Typography>
                               <Input
                                 size="lg"
-                                defaultValue={campName}
                                 type="text"
                                 name="name"
+                                defaultValue={loadedCamp?.Camp_Name}
                                 placeholder="name@mail.com"
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -145,7 +164,6 @@ const CampUpdateModal = ({
                               <Input
                                 size="lg"
                                 type="number"
-                                defaultValue={campFee}
                                 name="fee"
                                 placeholder="name@mail.com"
                                 required
@@ -172,7 +190,6 @@ const CampUpdateModal = ({
                                 size="lg"
                                 type="datetime-local"
                                 placeholder="Enter Date and Time"
-                                defaultValue={date}
                                 name="datetime"
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -194,7 +211,6 @@ const CampUpdateModal = ({
                               <Input
                                 size="lg"
                                 type="text"
-                                defaultValue={location}
                                 placeholder="Enter camp loaction"
                                 name="location"
                                 required
@@ -220,7 +236,6 @@ const CampUpdateModal = ({
                               <Input
                                 size="lg"
                                 type="text"
-                                defaultValue={special}
                                 name="specialized"
                                 placeholder="use comma after each service"
                                 required
@@ -244,7 +259,6 @@ const CampUpdateModal = ({
                                 size="lg"
                                 type="text"
                                 name="professionals"
-                                defaultValue={professionals}
                                 placeholder="use comma after each professionals"
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -269,7 +283,6 @@ const CampUpdateModal = ({
                               <Input
                                 size="lg"
                                 type="text"
-                                defaultValue={audience}
                                 placeholder=""
                                 name="audience"
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -315,7 +328,6 @@ const CampUpdateModal = ({
                               </Typography>
                               <Textarea
                                 required
-                                defaultValue={description}
                                 name="details"
                                 {...register("details")}
                                 size="lg"
