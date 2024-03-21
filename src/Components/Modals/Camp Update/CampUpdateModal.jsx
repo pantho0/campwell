@@ -11,16 +11,32 @@ import { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
-  //ToDO:
+  //Done:
   /**
-   * There is a flickering problem when the form load the default value 
-   * I have to fix it.
-   * 
-   */
+   * Problem Solved with tanstack query and by adding setValue via Object.Keys
+   * */
   const axiosPublic = useAxiosPublic();
-  const [loadedCamp, setLoadedCamp] = useState([]);
+  // const [loadedCamp, setLoadedCamp] = useState([]);
+  const {data:loadedCamp}=useQuery({
+    queryKey:['loadedCamp', campId, isOpen],
+    queryFn:async()=>{
+      const {data}=await axiosPublic(`/camp-details/${campId}`)
+      Object.keys(data).forEach((key) => {
+                setValue(key, data[key]);
+              });
+              setTimeout(() => {
+                reset();
+              }, 100);
+      console.log(data);
+      return data
+    }
+    
+  })
+
+  console.log(loadedCamp);
   const {
     register,
     handleSubmit,
@@ -64,35 +80,34 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
     reset();
   };
 
-  useEffect(() => {
-    if (isOpen && campId) {
-        axiosPublic(`/camp-details/${campId}`).then((res) => {
-        setLoadedCamp(res.data);
-        // Set form values using setValue after loading the data
-        Object.keys(res.data).forEach((key) => {
-          setValue(key, res.data[key]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //       axiosPublic(`/camp-details/${campId}`).then((res) => {
+  //       setLoadedCamp(res.data);
+  //       // Set form values using setValue after loading the data
+  //       Object.keys(res.data).forEach((key) => {
+  //         setValue(key, res.data[key]);
           
-        });
-        setTimeout(() => {
-          reset();
-        }, 100);
-      });
-    }
+  //       });
+  //       setTimeout(() => {
+  //         reset();
+  //       }, 100);
+  //     });
+  //   }
     
-  }, [axiosPublic, campId, isOpen, setValue, reset]);
+  // }, [axiosPublic, campId, isOpen, setValue, reset]);
 
 
-  useEffect(() => {
-    if (isOpen && campId) {
-      axiosPublic(`/camp-details/${campId}`).then((res) => {
-        setLoadedCamp(res.data);
-        Object.keys(res.data).forEach((key) => {
-          setValue(key, res.data[key]);
-        });
-      });
-    }
-  }, [axiosPublic, campId, isOpen, setValue]);
-  console.log(loadedCamp);
+  // useEffect(() => {
+  //   if (isOpen && campId) {
+  //     axiosPublic(`/camp-details/${campId}`).then((res) => {
+  //       setLoadedCamp(res.data);
+  //       Object.keys(res.data).forEach((key) => {
+  //         setValue(key, res.data[key]);
+  //       });
+  //     });
+  //   }
+  // }, [axiosPublic, campId, isOpen, setValue]);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -172,6 +187,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="number"
                                 name="fee"
                                 placeholder="name@mail.com"
+                                defaultValue={loadedCamp?.Camp_Fees}
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -197,6 +213,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="datetime-local"
                                 placeholder="Enter Date and Time"
                                 name="datetime"
+                                defaultValue={loadedCamp?.Scheduled_Date_and_Time}
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -219,6 +236,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="text"
                                 placeholder="Enter camp loaction"
                                 name="location"
+                                defaultValue={loadedCamp?.Venue_Location}
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -244,6 +262,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="text"
                                 name="specialized"
                                 placeholder="use comma after each service"
+                                defaultValue={loadedCamp?.Specialized_Services_Provided}
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -265,6 +284,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 size="lg"
                                 type="text"
                                 name="professionals"
+                                defaultValue={loadedCamp?.Healthcare_Professionals_in_Attendance}
                                 placeholder="use comma after each professionals"
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -290,6 +310,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 size="lg"
                                 type="text"
                                 placeholder=""
+                                defaultValue={loadedCamp?.Target_Audience}
                                 name="audience"
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -335,6 +356,7 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                               <Textarea
                                 required
                                 name="details"
+                                defaultValue={loadedCamp?.Details}
                                 {...register("details")}
                                 size="lg"
                                 label="Textarea Large"
