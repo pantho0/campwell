@@ -1,16 +1,63 @@
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Button,
-  Checkbox,
   Input,
   Option,
   Select,
   Textarea,
   Typography,
 } from "@material-tailwind/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { useForm} from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+
+
+
 
 const RegistrationModal = ({ isOpen, closeModal, fee }) => {
+  const {user} = useAuth()
+  const axiosPublic = useAxiosPublic()
+  const [gender, setGender] = useState('')
+  const selectedGender = (value) =>{
+   setGender(value);
+  }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async(data) => {
+    const registrationInfo = {  
+      name : data.name,
+      email : user?.email,
+      number : data.number, 
+      age : data.age,
+      gender : gender,
+      address : data.address,
+      emergency_number : data.emergencyNumber,
+      campFee : data.fee
+
+    }
+    const {data:regData} = await axiosPublic.post("/registration", registrationInfo)
+    if(regData.insertedId){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registration Successful",
+        background : "#1B5E20",
+        color : "#fff",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      closeModal()
+    }
+  }
+  
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -46,7 +93,7 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
                     Registration Form
                   </Dialog.Title>
                   <div className="mt-2">
-                    <form className="mt-8 mb-2 w-full">
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 w-full">
                       <div className="mb-1 flex flex-col gap-6">
                         <Typography
                           variant="h6"
@@ -57,11 +104,13 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
                         </Typography>
                         <Input
                           size="lg"
+                          required
                           placeholder="name@mail.com"
                           className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                           labelProps={{
                             className: "before:content-none after:content-none",
                           }}
+                          {...register("name")}
                         />
                         <Typography
                           variant="h6"
@@ -74,10 +123,12 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
                           size="lg"
                           type="number"
                           placeholder="name@mail.com"
+                          required
                           className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                           labelProps={{
                             className: "before:content-none after:content-none",
                           }}
+                          {...register("number")}
                         />
                         <Typography
                           variant="h6"
@@ -94,6 +145,8 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
                           labelProps={{
                             className: "before:content-none after:content-none",
                           }}
+                          {...register("age")}
+                          required
                         />
                       </div>
                       <div className="w-full mt-8 mb-2">
@@ -104,56 +157,60 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
                         >
                           Gender
                         </Typography>
-                        <Select label="Select Gender">
-                          <Option>Male</Option>
-                          <Option>Female</Option>
+                        <Select label="Select Gender" onChange={(e)=>selectedGender(e)}>
+                          <Option value="male">Male</Option>
+                          <Option value="female">Female</Option>
                         </Select>
                       </div>
                       <div className="w-full">
-                      <Typography
+                        <Typography
                           variant="h6"
                           color="blue-gray"
                           className="mb-3"
                         >
                           Address
                         </Typography>
-                        <Textarea label="Enter your address here" />
+                        <Textarea label="Enter your address here" {...register("address")} />
                       </div>
                       <Typography
-                          variant="h6"
-                          color="blue-gray"
-                          className="mb-3"
-                        >
-                          Emergency Contact Number
-                        </Typography>
-                        <Input
-                          size="lg"
-                          type="number"
-                          placeholder="name@mail.com"
-                          className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                          labelProps={{
-                            className: "before:content-none after:content-none",
-                          }}
-                        />
-                        <Typography
-                          variant="h6"
-                          color="blue-gray"
-                          className="mb-3"
-                        >
-                          Camp Fee
-                        </Typography>
-                        <Input
-                          size="lg"
-                          defaultValue={fee}
-                          readOnly
-                          type="number"
-                          placeholder="name@mail.com"
-                          className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                          labelProps={{
-                            className: "before:content-none after:content-none",
-                          }}
-                        />
-                      <Button className="mt-6" fullWidth>
+                        variant="h6"
+                        color="blue-gray"
+                        className="mb-3"
+                      >
+                        Emergency Contact Number
+                      </Typography>
+                      <Input
+                        size="lg"
+                        type="number"
+                        placeholder="name@mail.com"
+                        required
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                        {...register("emergencyNumber")}
+                      />
+                      <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="mb-3"
+                      >
+                        Camp Fee
+                      </Typography>
+                      <Input
+                        size="lg"
+                        defaultValue={fee}
+                        readOnly
+                        type="number"
+                        required
+                        placeholder="name@mail.com"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                        {...register("fee")}
+                      />
+                      <Button type="submit" className="mt-6" fullWidth>
                         Register
                       </Button>
                     </form>

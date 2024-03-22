@@ -8,6 +8,7 @@ import useAuth from "../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import ParticipantMenu from "../../Components/Dashboard/ParticipantMenu";
 
 const Dashboard = () => {
   const { logOut, user } = useAuth();
@@ -88,6 +89,12 @@ const Dashboard = () => {
               ) : (
                 ""
               )}
+             
+             {loggedUser && loggedUser.role === "Participant" ? (
+                <ParticipantMenu />
+              ) : (
+                ""
+              )}
             </div>
           </Drawer>
         </div>
@@ -131,6 +138,11 @@ const Dashboard = () => {
           ) : (
             ""
           )}
+          {loggedUser && loggedUser.role === "Participant" ? (
+                <ParticipantMenu />
+              ) : (
+                ""
+              )}
         </div>
         <div className="flex-1">
           <Outlet />
