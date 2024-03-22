@@ -21,7 +21,7 @@ const TABLE_HEAD = [
 
 const ManageCamp = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const [campId, setCampId] = useState('')
+  const [campId, setCampId] = useState("");
 
   function closeModal() {
     setIsOpen(false);
@@ -30,19 +30,16 @@ const ManageCamp = () => {
   function openModal() {
     setIsOpen(true);
   }
-  
 
   const axiosPublic = useAxiosPublic();
   const { email } = useParams();
-  const { data: camps = [], isPending } = useQuery({
+  const { data: camps = [], isPending, refetch } = useQuery({
     queryKey: ["camps", email],
     queryFn: async () => {
       const { data } = await axiosPublic(`/manage-camp/${email}`);
       return data;
     },
   });
-
-
 
   if (isPending) {
     return <p>Loading....</p>;
@@ -54,6 +51,7 @@ const ManageCamp = () => {
         isOpen={isOpen}
         closeModal={closeModal}
         campId={campId}
+        refetch={refetch}
       />
       <div>
         <h4 className="text-center text-bold text-green-800 text-3xl underline mt-4 mb-4">
@@ -200,7 +198,7 @@ const ManageCamp = () => {
                           <Button
                             onClick={() => {
                               openModal();
-                              setCampId(_id)
+                              setCampId(_id);
                             }}
                             variant="outlined"
                             size="sm"

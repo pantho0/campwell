@@ -12,31 +12,28 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
 
-const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
+const CampUpdateModal = ({ isOpen, closeModal, campId, refetch }) => {
   //Done:
   /**
    * Problem Solved with tanstack query and by adding setValue via Object.Keys
    * */
+const {user} = useAuth()
   const axiosPublic = useAxiosPublic();
-  // const [loadedCamp, setLoadedCamp] = useState([]);
-  const {data:loadedCamp}=useQuery({
-    queryKey:['loadedCamp', campId, isOpen],
-    queryFn:async()=>{
-      const {data}=await axiosPublic(`/camp-details/${campId}`)
+  const { data: loadedCamp } = useQuery({
+    queryKey: ["loadedCamp", campId, isOpen],
+    queryFn: async () => {
+      const { data } = await axiosPublic(`/camp-details/${campId}`);
       Object.keys(data).forEach((key) => {
-                setValue(key, data[key]);
-              });
-              setTimeout(() => {
-                reset();
-              }, 100);
-      console.log(data);
-      return data
-    }
-    
-  })
-
-  console.log(loadedCamp);
+        setValue(key, data[key]);
+      });
+      setTimeout(() => {
+        reset();
+      }, 100);
+      return data;
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -61,53 +58,27 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
       Details: data.details,
       organizer_email: user?.email,
     };
-
-    const { data: campuploadresult } = await axiosPublic.post(
-      "/add-camp",
+    console.log(campData);
+    const { data: campuploadresult } = await axiosPublic.patch(
+      `/update-camp/${campId}`,
       campData
     );
-    if (campuploadresult.insertedId) {
+
+    if(campuploadresult.modifiedCount > 0){
+      refetch()
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Camp Added",
-        background: "#1B5E20",
-        color: "#fff",
+        title: "Camp Updated Successfully",
+        background : "#1B5E20",
+        color : "#fff",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1500
       });
     }
-    reset();
+    
   };
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //       axiosPublic(`/camp-details/${campId}`).then((res) => {
-  //       setLoadedCamp(res.data);
-  //       // Set form values using setValue after loading the data
-  //       Object.keys(res.data).forEach((key) => {
-  //         setValue(key, res.data[key]);
-          
-  //       });
-  //       setTimeout(() => {
-  //         reset();
-  //       }, 100);
-  //     });
-  //   }
-    
-  // }, [axiosPublic, campId, isOpen, setValue, reset]);
-
-
-  // useEffect(() => {
-  //   if (isOpen && campId) {
-  //     axiosPublic(`/camp-details/${campId}`).then((res) => {
-  //       setLoadedCamp(res.data);
-  //       Object.keys(res.data).forEach((key) => {
-  //         setValue(key, res.data[key]);
-  //       });
-  //     });
-  //   }
-  // }, [axiosPublic, campId, isOpen, setValue]);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -213,7 +184,9 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="datetime-local"
                                 placeholder="Enter Date and Time"
                                 name="datetime"
-                                defaultValue={loadedCamp?.Scheduled_Date_and_Time}
+                                defaultValue={
+                                  loadedCamp?.Scheduled_Date_and_Time
+                                }
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -262,7 +235,9 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 type="text"
                                 name="specialized"
                                 placeholder="use comma after each service"
-                                defaultValue={loadedCamp?.Specialized_Services_Provided}
+                                defaultValue={
+                                  loadedCamp?.Specialized_Services_Provided
+                                }
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
@@ -284,7 +259,9 @@ const CampUpdateModal = ({ isOpen, closeModal, campId }) => {
                                 size="lg"
                                 type="text"
                                 name="professionals"
-                                defaultValue={loadedCamp?.Healthcare_Professionals_in_Attendance}
+                                defaultValue={
+                                  loadedCamp?.Healthcare_Professionals_in_Attendance
+                                }
                                 placeholder="use comma after each professionals"
                                 required
                                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
