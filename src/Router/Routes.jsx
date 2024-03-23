@@ -10,6 +10,7 @@ import AvailableCamps from "../Pages/Available Camp/AvailableCamps";
 import AddCamp from "../Pages/Dashboard/Organizer Dashboard/AddCamp";
 import ManageCamp from "../Pages/Dashboard/Organizer Dashboard/ManageCamp";
 import useAuth from "../Components/Hooks/useAuth";
+import RegisteredCamps from "../Pages/Dashboard/Participants/RegisteredCamps";
 
 
 const axiosPublic = useAxiosPublic()
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
         {
           path : 'manage-camps/:email',
           element : <ManageCamp/>,
+        },
+        {
+          path : 'registered-camps',
+          element : <RegisteredCamps/>
         }
       ]
     }

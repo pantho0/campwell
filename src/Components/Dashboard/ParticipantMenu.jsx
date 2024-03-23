@@ -9,7 +9,7 @@ const ParticipantMenu = () => {
       <Button className="py-6 bg-green-500 hover:bg-green-600">
         Profile Management
       </Button>
-      <Link to="#">
+      <Link to="/dashboard/registered-camps">
         <Button className="py-6 w-full bg-green-500 hover:bg-green-600">
           Registered Camps
         </Button>

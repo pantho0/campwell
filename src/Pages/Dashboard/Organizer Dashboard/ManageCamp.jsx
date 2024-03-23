@@ -59,7 +59,7 @@ const ManageCamp = () => {
         </h4>
       </div>
       <div>
-        <Card className="h-[calc(100vh-15vh)] max-w-[1045px] overflow-scroll">
+        <Card className="min-h-[calc(100vh-15vh)] max-w-[1045px] overflow-scroll">
           <table className="text-center">
             <thead>
               <tr>

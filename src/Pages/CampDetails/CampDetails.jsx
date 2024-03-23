@@ -12,14 +12,20 @@ const CampDetails = () => {
     setIsOpen(true)
   }
   const camp = useLoaderData();
-  const fee = camp?.data?.Camp_Fees
+  const fee = camp?.data?.Camp_Fees;
+  const name = camp?.data?.Camp_Name;
+  const campId = camp?.data?._id;
+  const date = camp?.data?.Scheduled_Date_and_Time;
+
+
+  console.log(campId);
   return (
     <div
       className="px-4 py-24 mx-auto max-w-7xl"
       itemScope
       itemType={camp.data.Image}
     >
-      <RegistrationModal isOpen={isOpen}  closeModal={closeModal} fee={fee}/>
+      <RegistrationModal isOpen={isOpen}  closeModal={closeModal} fee={fee} campId={campId} date={date} name={name}  />
       <div className="w-full mx-auto mb-4 text-left md:w-3/4 lg:w-1/2">
         <img
           src={camp.data?.Image}

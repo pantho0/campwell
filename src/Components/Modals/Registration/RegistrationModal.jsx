@@ -16,13 +16,16 @@ import Swal from "sweetalert2";
 
 
 
-const RegistrationModal = ({ isOpen, closeModal, fee }) => {
+const RegistrationModal = ({ isOpen, closeModal, fee, campId, date, name:campName }) => {
   const {user} = useAuth()
   const axiosPublic = useAxiosPublic()
   const [gender, setGender] = useState('')
   const selectedGender = (value) =>{
    setGender(value);
   }
+
+
+
   const {
     register,
     handleSubmit,
@@ -33,13 +36,19 @@ const RegistrationModal = ({ isOpen, closeModal, fee }) => {
   const onSubmit = async(data) => {
     const registrationInfo = {  
       name : data.name,
+      campName : campName,
       email : user?.email,
       number : data.number, 
       age : data.age,
       gender : gender,
       address : data.address,
       emergency_number : data.emergencyNumber,
-      campFee : data.fee
+      campFee : data.fee,
+      payment : 'unpain',
+      status : 'pending',
+      campid : campId,
+      date : date,
+
 
     }
     const {data:regData} = await axiosPublic.post("/registration", registrationInfo)
