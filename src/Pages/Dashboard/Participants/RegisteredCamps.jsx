@@ -2,12 +2,22 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import useAuth from "../../../Components/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import CheckoutModal from "../../../Components/Modals/Checkout Modal/CheckoutModal";
+import { useState } from "react";
 
 const TABLE_HEAD = ["Camp Name", "Date and Time", "Camp Fees", "Payment Status", 'Confirmation Status', 'Actions' ];
 
 
 
 const RegisteredCamps = () => {
+  let [isOpen, setIsOpen] = useState(false)
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const { data: camps = [], isPending } = useQuery({
@@ -20,13 +30,13 @@ const RegisteredCamps = () => {
     },
   });
 
-console.log(camps);
 
   if (isPending) {
     return <p>Loading...........</p>;
   }
   return (
     <div>
+      <CheckoutModal isOpen={isOpen} closeModal={closeModal} />
       <div>
         <h4 className="text-center text-bold text-green-800 text-3xl underline mt-4 mb-4">
           Registered Camps
@@ -128,7 +138,7 @@ console.log(camps);
                         color="blue-gray"
                         className="font-medium"
                       >
-                        <Button>Pay Now</Button>
+                        <Button onClick={openModal}>Pay Now</Button>
                       </Typography>
                     </td>
                   </tr>

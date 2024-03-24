@@ -44,7 +44,7 @@ const RegistrationModal = ({ isOpen, closeModal, fee, campId, date, name:campNam
       address : data.address,
       emergency_number : data.emergencyNumber,
       campFee : data.fee,
-      payment : 'unpain',
+      payment : 'unpaid',
       status : 'pending',
       campid : campId,
       date : date,
