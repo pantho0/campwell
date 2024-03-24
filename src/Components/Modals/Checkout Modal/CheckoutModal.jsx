@@ -1,11 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
 
 const CheckoutModal = ({ isOpen, closeModal }) => {
+  const {user} = useAuth()
+  const [txId, setTxId]= useState('')
   const [error, setError] = useState("");
+  const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe();
   const elements = useElements();
+  const axiosPublic = useAxiosPublic()
+
+  useEffect(()=>{
+    axiosPublic.post('/create-payment-intent')
+    .then(res=>setClientSecret(res.data))
+  },[axiosPublic])
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,8 +41,28 @@ const CheckoutModal = ({ isOpen, closeModal }) => {
       setError("");
       console.log(paymentMethod);
     }
+  
+    const {paymentIntent, error:cardError} = await stripe.confirmCardPayment(clientSecret, {
+      payment_method : {
+        card : card,
+        billing_details : {
+          email : user?.email || 'anonymous',
+          name : user?.displayName || 'anonymous',
+        }
+      }
+    })
+
+    if(cardError){
+      console.log('confirming card payment error', cardError);
+    }else{
+      console.log('confirm card payment success', paymentIntent);
+      setTxId(paymentIntent.id)
+    }
+
+  
   };
 
+    
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
