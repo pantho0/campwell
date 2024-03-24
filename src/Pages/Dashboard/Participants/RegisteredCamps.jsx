@@ -3,7 +3,9 @@ import useAuth from "../../../Components/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import CheckoutModal from "../../../Components/Modals/Checkout Modal/CheckoutModal";
+import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
 
 const TABLE_HEAD = ["Camp Name", "Date and Time", "Camp Fees", "Payment Status", 'Confirmation Status', 'Actions' ];
 
@@ -34,9 +36,15 @@ const RegisteredCamps = () => {
   if (isPending) {
     return <p>Loading...........</p>;
   }
+
+  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY)
+
+
   return (
     <div>
+      <Elements stripe={stripePromise}>
       <CheckoutModal isOpen={isOpen} closeModal={closeModal} />
+      </Elements>
       <div>
         <h4 className="text-center text-bold text-green-800 text-3xl underline mt-4 mb-4">
           Registered Camps
