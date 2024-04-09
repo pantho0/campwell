@@ -146,7 +146,7 @@ const RegisteredCamps = () => {
                         color="blue-gray"
                         className="font-medium"
                       >
-                        <Button onClick={openModal}>Pay Now</Button>
+                        <Button onClick={openModal}>Pay</Button>
                       </Typography>
                     </td>
                   </tr>
