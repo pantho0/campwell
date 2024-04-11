@@ -33,7 +33,7 @@ const CampDetails = () => {
           alt="Kutty"
         />
         <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary">
-          Development
+          Developments
         </p>
         <h1
           className="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl"
