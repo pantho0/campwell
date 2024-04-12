@@ -58,7 +58,7 @@ const AddCamp = () => {
     <div>
       <div>
         <h4 className="text-center text-bold text-green-800 text-3xl underline mt-4 mb-4">
-          ADD A CAMP
+          ADD NEW CAMP
         </h4>
       </div>
       <div className="w-full">
