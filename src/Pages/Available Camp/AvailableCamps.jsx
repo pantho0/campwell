@@ -31,7 +31,7 @@ const AvailableCamps = () => {
     <Container>
       <div className="mt-16 relative">
         <h3 className="text-3xl text-center font-bold text-gray-800">
-          Popular Medical Camps
+          Available Camps
         </h3>
         <div className="absolute right-0">
           <div className="flex w-72 flex-col gap-6">
